@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iguojie.rbac.dao.RoleDao">
+  <resultMap id="BaseResultMap" type="com.iguojie.rbac.entity.Role">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="name_zh" jdbcType="VARCHAR" property="nameZh" />
+  </resultMap>
+
+
+  <select id="queryRoleWithMenu" resultType="com.iguojie.rbac.bo.RoleWithMenu">
+    SELECT
+      a.`name` `role_name`,
+      c.url url
+    FROM
+      role a
+        LEFT JOIN role_menu b ON a.id = b.rid
+        LEFT JOIN menu c ON b.mid = c.id
+  </select>
+</mapper>
